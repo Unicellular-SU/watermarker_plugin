@@ -1,5 +1,5 @@
 name: watermark_plugin
-description: "A new Flutter FFI plugin project."
+description: "flutter watermarker plugin by rust"
 version: 0.0.1
 homepage:
 

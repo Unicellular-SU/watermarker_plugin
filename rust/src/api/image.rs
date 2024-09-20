@@ -1,4 +1,4 @@
-use image::{GenericImageView, Rgba};
+use image::{DynamicImage,GenericImageView, Rgba};
 use std::path::Path;
 
 #[flutter_rust_bridge::frb(dart_async)]
@@ -40,7 +40,9 @@ pub fn add_watermark(src_path: &str, watermark_path: &str, output_path: &str) {
     }
 
     // Save the result
-    src_image_buffer.save(Path::new(output_path)).expect("Failed to save image");
+    let rgb_image = DynamicImage::ImageRgba8(src_image_buffer).to_rgb8();
+    rgb_image.save(Path::new(output_path)).expect("Failed to save image");
+    // src_image_buffer.save(Path::new(output_path)).expect("Failed to save image");
 }
 
 fn blend_pixels(src: Rgba<u8>, watermark: Rgba<u8>, alpha: f32) -> Rgba<u8> {
